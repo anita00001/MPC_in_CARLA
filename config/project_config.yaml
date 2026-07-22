@@ -1,0 +1,23 @@
+project:
+  ego_vehicle_count: 1
+  initial_state_source: ground_truth
+  controller_architecture: dual_mpc
+
+vehicle:
+  blueprint: vehicle.lincoln.mkz
+
+controllers:
+  lateral:
+    enabled: true
+    type: linear_mpc
+
+  longitudinal:
+    enabled: true
+    type: linear_mpc
+
+simulation:
+  host: localhost
+  port: 2000
+  proposed_fixed_delta_seconds: 0.05
+  
+  # This is a declared project scope, not an environment check.
