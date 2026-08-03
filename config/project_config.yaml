@@ -1,23 +1,36 @@
 project:
+  name: MPC_in_CARLA
   ego_vehicle_count: 1
   initial_state_source: ground_truth
   controller_architecture: dual_mpc
 
-vehicle:
-  blueprint: vehicle.lincoln.mkz
-
-controllers:
-  lateral:
-    enabled: true
-    type: linear_mpc
-
-  longitudinal:
-    enabled: true
-    type: linear_mpc
-
 simulation:
   host: localhost
   port: 2000
-  proposed_fixed_delta_seconds: 0.05
-  
-  # This is a declared project scope, not an environment check.
+  timeout_seconds: 10.0
+  fixed_delta_seconds: 0.05
+
+vehicle:
+  blueprint: vehicle.lincoln.mkz
+  role_name: ego
+
+  # Set to an integer to force one spawn point.
+  # Set to null to try all available spawn points.
+  spawn_point_index: null
+
+  autopilot: false
+
+  # Raise the spawn transform slightly to reduce road-surface collision.
+  spawn_z_offset: 0.25
+
+  # Randomize the order of spawn points when no fixed index is selected.
+  randomize_spawn_points: false
+
+  # Used only when randomize_spawn_points is true.
+  random_seed: 42
+
+  # Move the CARLA spectator above and behind the ego vehicle.
+  follow_with_spectator: true
+
+  spectator_height: 8.0
+  spectator_distance: 12.0
