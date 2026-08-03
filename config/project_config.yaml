@@ -8,7 +8,16 @@ simulation:
   host: localhost
   port: 2000
   timeout_seconds: 10.0
+
+  synchronous_mode: true
   fixed_delta_seconds: 0.05
+  no_rendering_mode: false
+
+  traffic_manager:
+    enabled: false
+    port: 8000
+    synchronous_mode: true
+    random_seed: 42
 
 vehicle:
   blueprint: vehicle.lincoln.mkz
