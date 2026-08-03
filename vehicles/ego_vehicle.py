@@ -258,9 +258,15 @@ class EgoVehicleManager:
             except Exception:
                 self.destroy()
                 raise
-
+            
             if self.config.follow_with_spectator:
-                self.position_spectator()
+                try:
+                    self.position_spectator()
+                except RuntimeError as error:
+                    print(
+                        "WARNING: Could not position spectator:",
+                        error,
+                    )
 
             return self.vehicle
 
@@ -274,10 +280,9 @@ class EgoVehicleManager:
             f"Attempted spawn-point indexes: {attempted_text}. "
             "A spawn point may be occupied or obstructed."
         )
-
     def position_spectator(self) -> None:
         """Place the spectator above and behind the ego vehicle."""
-        if self.vehicle is None or not self.vehicle.is_alive:
+        if self.vehicle is None:
             raise RuntimeError(
                 "Cannot position the spectator before spawning "
                 "the ego vehicle."
@@ -315,8 +320,7 @@ class EgoVehicleManager:
                 spectator_location,
                 spectator_rotation,
             )
-        )
-
+    )
     def destroy(self) -> bool:
         """Destroy the managed ego vehicle if it exists."""
         if self.vehicle is None:

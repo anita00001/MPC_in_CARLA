@@ -95,6 +95,11 @@ DIAGNOSTICS = [
         requires_spawned_vehicle=True,
     ),
     Diagnostic(
+        group="CARLA deterministic session",
+        path="scenarios/test_synchronous_session.py",
+        requires_carla_server=True,
+    ),
+    Diagnostic(
         group="CARLA performance",
         path="diagnostics/carla/benchmark_carla_tick.py",
         requires_carla_server=True,
